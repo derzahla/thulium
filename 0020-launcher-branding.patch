@@ -1,0 +1,26 @@
+diff --git a/Makefile b/Makefile
+index 56d157e..27639f9 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,7 +1,7 @@
+ PREFIX = /usr/local
+ 
+ CHROMIUM_SUFFIX  =
+-CHROMIUM_NAME    = chromium$(CHROMIUM_SUFFIX)
++CHROMIUM_NAME    = thulium$(CHROMIUM_SUFFIX)
+ CHROMIUM_BINARY  = /usr/lib/$(CHROMIUM_NAME)/$(CHROMIUM_NAME)
+ CHROMIUM_VENDOR  = $(shell . /etc/os-release; echo $$NAME)
+ 
+diff --git a/launcher.c b/launcher.c
+index 81cc35e..fe82cbf 100644
+--- a/launcher.c
++++ b/launcher.c
+@@ -54,7 +54,7 @@ static void show_help(const char *user_flags_conf_path, GSList *user_flags) {
+   fprintf(
+       stderr,
+       "\n"
+-      "Chromium launcher %s -- for Chromium help, see `man %s`\n"
++      "Thulium launcher %s -- for Thulium help, see `man %s`\n"
+       "\n"
+       "Custom flags are read from the following file:\n\n"
+       "  %s\n\n"

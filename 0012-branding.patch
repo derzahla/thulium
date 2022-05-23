@@ -1,0 +1,189 @@
+diff --git a/app/chromium_strings.grd b/app/chromium_strings.grd
+index ec71c41..05d0eb0 100644
+--- a/app/chromium_strings.grd
++++ b/app/chromium_strings.grd
+@@ -279,10 +279,10 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
+       </if>
+ 
+       <message name="IDS_PRODUCT_NAME" desc="The Chrome application name">
+-        Chromium
++        Thulium
+       </message>
+       <message name="IDS_SHORT_PRODUCT_NAME" desc="The Chrome application short name.">
+-        Chromium
++        Thulium
+       </message>
+       <if expr="is_win">
+         <message name="IDS_SXS_SHORTCUT_NAME" desc="Unused in Chromium builds" translateable="false">
+@@ -292,7 +292,7 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
+         <message name="IDS_SHORTCUT_NAME_DEV" desc="Unused in Chromium builds" translateable="false">
+         </message>
+         <message name="IDS_PRODUCT_DESCRIPTION" desc="Browser description">
+-          Chromium is a web browser that runs webpages and applications with lightning speed. It's fast, stable, and easy to use. Browse the web more safely with malware and phishing protection built into Chromium.
++          Thulium is based on ungoogled-chromium, which is Google Chromium, sans dependency on Google web services. It also features some tweaks to enhance privacy, control, and transparency (almost all of which require manual activation or enabling).
+         </message>
+         <message name="IDS_WELCOME_TO_CHROME" desc="Welcoming text announced via screen readers the first time Chrome is launched at the conclusion of installation.">
+           Welcome to Chromium; new browser window opened
+@@ -328,7 +328,7 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
+       </if>
+       <if expr="not is_macosx and not chromeos">
+         <message name="IDS_TASK_MANAGER_TITLE" desc="The title of the Task Manager window">
+-          Task Manager - Chromium
++          Task Manager - Thulium
+         </message>
+       </if>
+       <message name="IDS_SESSION_CRASHED_VIEW_UMA_OPTIN" desc="Text besides the checkbox to let users optin to UMA in the restore from previous crash bubble.">
+@@ -730,7 +730,7 @@ Permissions you've already given to websites and apps may apply to this account.
+ 
+       <if expr="use_titlecase and not chromeos">
+         <message name="IDS_ABOUT" desc="In Title Case: The text label of the About Chrome menu item">
+-          About &amp;Chromium
++          About &amp;Thulium
+         </message>
+         <message name="IDS_RELAUNCH_TO_UPDATE" desc="In Title Case: The text label of the relaunch to update Chrome menu item">
+           Relaunch to Update &amp;Chromium
+@@ -738,7 +738,7 @@ Permissions you've already given to websites and apps may apply to this account.
+       </if>
+       <if expr="not use_titlecase and not chromeos">
+         <message name="IDS_ABOUT" desc="The text label of the About Chrome menu item">
+-          About &amp;Chromium
++          About &amp;Thulium
+         </message>
+         <message name="IDS_RELAUNCH_TO_UPDATE" desc="The text label of the relaunch to update Chrome menu item">
+           Relaunch to update &amp;Chromium
+@@ -755,7 +755,7 @@ Permissions you've already given to websites and apps may apply to this account.
+ 
+       <if expr="is_macosx">
+         <message name="IDS_APP_MENU_PRODUCT_NAME" desc="The application's short name, used for the Mac's application menu, activity monitor, etc. This should be less than 16 characters. Example: Chrome, not Google Chrome.">
+-          Chromium
++          Thulium
+         </message>
+         <message name="IDS_HELPER_NAME" desc="The helper application's name.  Should contain the Chrome application name (IDS_PRODUCT_NAME). Example: Google Chrome Helper.">
+           Chromium Helper
+diff --git a/common/chrome_constants.cc b/common/chrome_constants.cc
+index 6fec2c1..51c4109 100644
+--- a/common/chrome_constants.cc
++++ b/common/chrome_constants.cc
+@@ -13,9 +13,9 @@
+ 
+ #if BUILDFLAG(IS_MAC)
+ #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
+-#define PRODUCT_STRING "Google Chrome"
++#define PRODUCT_STRING "Thulium"
+ #elif BUILDFLAG(CHROMIUM_BRANDING)
+-#define PRODUCT_STRING "Chromium"
++#define PRODUCT_STRING "Thulium"
+ #else
+ #error Unknown branding
+ #endif
+@@ -44,9 +44,9 @@ const char kChromeVersion[] = CHROME_VERSION_STRING;
+ 
+ #if BUILDFLAG(IS_WIN)
+ const base::FilePath::CharType kBrowserProcessExecutableName[] =
+-    FPL("chrome.exe");
++    FPL("thulium.exe");
+ const base::FilePath::CharType kHelperProcessExecutableName[] =
+-    FPL("chrome.exe");
++    FPL("thulium.exe");
+ #elif BUILDFLAG(IS_MAC)
+ const base::FilePath::CharType kBrowserProcessExecutableName[] =
+     FPL(PRODUCT_STRING);
+@@ -54,11 +54,11 @@ const base::FilePath::CharType kHelperProcessExecutableName[] =
+     FPL(PRODUCT_STRING " Helper");
+ #elif BUILDFLAG(IS_ANDROID)
+ // NOTE: Keep it synced with the process names defined in AndroidManifest.xml.
+-const base::FilePath::CharType kBrowserProcessExecutableName[] = FPL("chrome");
++const base::FilePath::CharType kBrowserProcessExecutableName[] = FPL("thulium");
+ const base::FilePath::CharType kHelperProcessExecutableName[] =
+     FPL("sandboxed_process");
+ #elif BUILDFLAG(IS_POSIX)
+-const base::FilePath::CharType kBrowserProcessExecutableName[] = FPL("chrome");
++const base::FilePath::CharType kBrowserProcessExecutableName[] = FPL("thulium");
+ // Helper processes end up with a name of "exe" due to execing via
+ // /proc/self/exe.  See bug 22703.
+ const base::FilePath::CharType kHelperProcessExecutableName[] = FPL("exe");
+@@ -66,20 +66,20 @@ const base::FilePath::CharType kHelperProcessExecutableName[] = FPL("exe");
+ 
+ #if BUILDFLAG(IS_WIN)
+ const base::FilePath::CharType kBrowserProcessExecutablePath[] =
+-    FPL("chrome.exe");
++    FPL("thulium.exe");
+ const base::FilePath::CharType kHelperProcessExecutablePath[] =
+-    FPL("chrome.exe");
++    FPL("thulium.exe");
+ #elif BUILDFLAG(IS_MAC)
+ const base::FilePath::CharType kBrowserProcessExecutablePath[] =
+     FPL(PRODUCT_STRING ".app/Contents/MacOS/" PRODUCT_STRING);
+ const base::FilePath::CharType kHelperProcessExecutablePath[] =
+     FPL(PRODUCT_STRING " Helper.app/Contents/MacOS/" PRODUCT_STRING " Helper");
+ #elif BUILDFLAG(IS_ANDROID)
+-const base::FilePath::CharType kBrowserProcessExecutablePath[] = FPL("chrome");
+-const base::FilePath::CharType kHelperProcessExecutablePath[] = FPL("chrome");
++const base::FilePath::CharType kBrowserProcessExecutablePath[] = FPL("thulium");
++const base::FilePath::CharType kHelperProcessExecutablePath[] = FPL("thulium");
+ #elif BUILDFLAG(IS_POSIX)
+-const base::FilePath::CharType kBrowserProcessExecutablePath[] = FPL("chrome");
+-const base::FilePath::CharType kHelperProcessExecutablePath[] = FPL("chrome");
++const base::FilePath::CharType kBrowserProcessExecutablePath[] = FPL("thulium");
++const base::FilePath::CharType kHelperProcessExecutablePath[] = FPL("thulium");
+ #endif  // OS_*
+ 
+ #if BUILDFLAG(IS_MAC)
+@@ -91,8 +91,8 @@ const char kMacHelperSuffixAlerts[] = " (Alerts)";
+ #endif  // BUILDFLAG(IS_MAC)
+ 
+ #if BUILDFLAG(IS_WIN)
+-const base::FilePath::CharType kBrowserResourcesDll[] = FPL("chrome.dll");
+-const base::FilePath::CharType kElfDll[] = FPL("chrome_elf.dll");
++const base::FilePath::CharType kBrowserResourcesDll[] = FPL("thulium.dll");
++const base::FilePath::CharType kElfDll[] = FPL("thulium_elf.dll");
+ const base::FilePath::CharType kStatusTrayWindowClass[] =
+     FPL("Chrome_StatusTrayWindow");
+ #endif  // BUILDFLAG(IS_WIN)
+diff --git a/common/chrome_paths.cc b/common/chrome_paths.cc
+index 97f406b..9da3117 100644
+--- a/common/chrome_paths.cc
++++ b/common/chrome_paths.cc
+@@ -51,7 +51,7 @@ const base::FilePath::CharType kFilepathSinglePrefExtensions[] =
+ #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
+     FILE_PATH_LITERAL("/usr/share/google-chrome/extensions");
+ #else
+-    FILE_PATH_LITERAL("/usr/share/chromium/extensions");
++    FILE_PATH_LITERAL("/usr/share/thulium/extensions");
+ #endif  // BUILDFLAG(GOOGLE_CHROME_BRANDING)
+ 
+ #endif  // BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS)
+diff --git a/common/chrome_paths_linux.cc b/common/chrome_paths_linux.cc
+index fc9d67e..de70cd4 100644
+--- a/common/chrome_paths_linux.cc
++++ b/common/chrome_paths_linux.cc
+@@ -89,12 +89,7 @@ bool GetDefaultUserDataDirectory(base::FilePath* result) {
+         GetXDGDirectory(env.get(), kXdgConfigHomeEnvVar, kDotConfigDir);
+   }
+ 
+-#if BUILDFLAG(GOOGLE_CHROME_BRANDING)
+-  std::string data_dir_basename = "google-chrome";
+-#else
+-  std::string data_dir_basename = "chromium";
+-#endif
+-  *result = config_dir.Append(data_dir_basename + GetChannelSuffixForDataDir());
++  *result = config_dir.Append("thulium");
+   return true;
+ }
+ 
+diff --git a/test/chromedriver/chrome/chrome_finder.cc b/test/chromedriver/chrome/chrome_finder.cc
+index 05d3e61..e9d8278 100644
+--- a/test/chromedriver/chrome/chrome_finder.cc
++++ b/test/chromedriver/chrome/chrome_finder.cc
+@@ -140,10 +140,8 @@ bool FindChrome(base::FilePath* browser_exe) {
+ #if BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC)
+     base::FilePath(chrome::kBrowserProcessExecutablePath),
+ #elif BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS)
+-    base::FilePath("google-chrome"),
+     base::FilePath(chrome::kBrowserProcessExecutablePath),
+-    base::FilePath("chromium"),
+-    base::FilePath("chromium-browser")
++    base::FilePath("thulium")
+ #else
+     // it will compile but won't work on other OSes
+     base::FilePath()
