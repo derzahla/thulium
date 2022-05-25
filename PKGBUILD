@@ -253,7 +253,8 @@ build() {
     export AR=ar
   fi
   export NM=nm
-  export CFLAGS="-march=armv8.5-a -mcpu=apple-m1 -mtune=apple-m1 -O3 -pipe -fstack-protector-strong -fno-plt -fexceptions -Wp,-D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security"
+  export CFLAGS="-march=armv8.5-a -mtune=apple-m1 -O2 -pipe -fstack-protector-strong -fno-plt -fexceptions -Wp,-D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security"
+  #export CFLAGS="-march=armv8.5-a -mcpu=apple-m1 -mtune=apple-m1 -O3 -pipe -fstack-protector-strong -fno-plt -fexceptions -Wp,-D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security"
   export CXXFLAGS=$CFLAGS
 
   local _flags=(
@@ -280,6 +281,7 @@ build() {
     'enable_widevine=true'
     'enable_nacl=false'
     'use_vaapi=true'
+    # wayland/ozone
     'use_ozone=true'
     'ozone_auto_platforms=false'
     'ozone_platform_headless=true'
@@ -363,9 +365,9 @@ package() {
 
   # Install binaries
   install -D out/Release/chrome "$pkgdir/usr/lib/$pkgname/$pkgname"
-  install -D out/Release/chromedriver "$pkgdir/usr/lib/$pkgname/thuledriver"
+  install -D out/Release/chromedriver "$pkgdir/usr/lib/$pkgname/chromedriver"
   install -Dm4755 out/Release/chrome_sandbox "$pkgdir/usr/lib/$pkgname/chrome-sandbox"
-  ln -s /usr/lib/$pkgname/thuledriver "$pkgdir/usr/bin/thuledriver"
+  ln -s /usr/lib/$pkgname/chromedriver "$pkgdir/usr/bin/thuledriver"
 
   # needed for vaapi
   install -Dm644 ../drirc-disable-10bpc-color-configs.conf \
