@@ -1,4 +1,4 @@
-From f12b4ded135923ab34d5747c8baf0d9b5bfdedcf Mon Sep 17 00:00:00 2001
+From fe03c5d7c0afccd13308e2f436bb06f5ac73c94c Mon Sep 17 00:00:00 2001
 From: Kevin Mihelich <kevin@archlinuxarm.org>
 Date: Tue, 2 Feb 2021 13:58:59 -0700
 Subject: [PATCH 2/3] Run blink bindings generation single threaded
@@ -21,5 +21,5 @@ index 3b474c47dc7ce..e7787535882f9 100644
        rebase_path(web_idl_database, root_build_dir),
        "--root_src_dir",
 -- 
-2.35.1
+2.36.1
 

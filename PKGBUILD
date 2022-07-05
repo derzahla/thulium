@@ -8,10 +8,10 @@
 # Chromium, ungoogled, and compiled for Asahi linux
 
 pkgname=thulium
-pkgver=102.0.5005.61
+pkgver=103.0.5060.53
 pkgrel=1
 _launcher_ver=8
-_gcc_patchset=6
+_gcc_patchset=4
 pkgdesc="A web browser built for speed, simplicity, and security"
 arch=('aarch64')
 url="https://www.chromium.org/Home"
@@ -32,49 +32,50 @@ source=(https://commondatastorage.googleapis.com/chromium-browser-official/chrom
         chromium-launcher-$_launcher_ver.tar.gz::https://github.com/foutrelis/chromium-launcher/archive/v$_launcher_ver.tar.gz
         # Patchset
         https://github.com/stha09/chromium-patches/releases/download/chromium-${pkgver%%.*}-patchset-$_gcc_patchset/chromium-${pkgver%%.*}-patchset-$_gcc_patchset.tar.xz
-        logos.zip
-        0012-branding.patch
-        0020-launcher-branding.patch
-        0021-appdata-branding.patch
+        enable-GlobalMediaControlsCastStartStop.patch
+        roll-src-third_party-ffmpeg.patch
         sql-make-VirtualCursor-standard-layout-type.patch
-        chromium-101-libxml-unbundle.patch
-        chromium-102-disable-dawn.patch
+        remove-no-opaque-pointers-flag.patch
+        use-oauth2-client-switches-as-default.patch
         0001-widevine-support-for-arm.patch
         0002-Run-blink-bindings-generation-single-threaded.patch
         0003-Fix-eu-strip-build-for-newer-GCC.patch
+        logos.zip
+        0012-branding.patch
+        0020-launcher-branding.patch
         )
 
-sha256sums=('1a3797d36901fa3ba63744b9a870b65a8890c9a850442c160196bc64df886b1f'
+sha256sums=('0ecbae14670506da90c8bf744f83f52a64a5fff0765c2e2e066b0e68b805b101'
             '213e50f48b67feb4441078d50b0fd431df34323be15be97c55302d3fdac4483a'
-            '23f2a772c4a6e31394d6ee7b8dbb5967d3b92bd859093444913377934bede594'
-            '67baea4bf01a981d922cb1b6f937abbafabc78ae244725ca9d8c589afbee3e43'
+            'fed11a8987d9f9baa04457fb114f8f7fdb800300a3780927020865bcc43e4f52'
+            '779fb13f2494209d3a7f1f23a823e59b9dded601866d3ab095937a1a04e19ac6'
+            '30df59a9e2d95dcb720357ec4a83d9be51e59cc5551365da4c0073e68ccdec44'
+            'b94b2e88f63cfb7087486508b8139599c89f96d7a4181c61fec4b4e250ca327a'
+            '00c16ce83ea4ca924a50fa0cfc2b2a4d744c722f363b065323e6ba0fcbac45a5'
+            'e393174d7695d0bafed69e868c5fbfecf07aa6969f3b64596d0bae8b067e1711'
+            '765d78ba10af7a4dfbf7badb1c32a2b9b4a21941531a766ca2cdc0ff00425d01'
+            '4c79e4beac02269c864e69264ba6325ea809a5fefb8f48553bb2a610b1bb45f5'
+            '597083226fd762c8e4fd527d4ea2478b8cbf9180f12740efd9c6a1f4798a5d3a'
+            '690d515ae1ec75292c85c39bb3dda26749b68d8182c74e2a3ec07ebea8b72daf'
             'c524cf6cfcfa00feff7f646f933aaa34d6ce7be04f64f8486f646fc9d4f80155'
             '1259cb3de4f7757d9308e4f1c71fedb77714a2721dd4629b918cd2eb65413ae3'
             '7e47ef4484ebb4d046fcd25c08bdb48ed5502fbc9499252fbaa869f81d0afa00'
-            'b94b2e88f63cfb7087486508b8139599c89f96d7a4181c61fec4b4e250ca327a'
-            'ea7a93442456a03549509022bca6f3a5e1600fa14caa062dd0fa0a6c45bbc9a8'
-            'edb917ee0a244e3d85b57a52560c99c5aaa3fd00d6a6346910722f20a26045f9'
-            'b05841e51807487f513f27cc85f8cbdf68306706afba2b03a5c5ad5965a29dc6'
-            '56ceefb17b73eea37525380bf8105cd0fd8fcee0979cfcd3729a78471a35b6f2'
-            '5ce5f3c9a4f76e704bb407a463587e9d71ed613478c17d3bc328e839c259bb0d'
-            'eb70d0260f121faa6e2efd8e80a5e258f23474a214ff9f4f112bdcffdaaadd83'
+            '96c7adbe1d9ec6fe77bb3d299a4bbcc63bcdbec04f736a73f218949a0ea5a83e'
             'c5cc6f52f22ef19490909d75cd0e7a1f48cdd35da0774327bf32634ede55413f'
-            '8d83bf6cf8f91f5d934aa5be4c1684fbde94bf51e630a960d574d5e52cd69d89'
-            '07bdc1b3fc8f0d0a4804d111c46ce3343cd7824de562f2848d429b917ce4bcfd'
+            'af20fc58aef22dd0b1fb560a1fab68d0d27187ff18fad7eb1670feab9bc4a8d8'
             '34d08ea93cb4762cb33c7cffe931358008af32265fc720f2762f0179c3973574')
 provides=('chromium')
 conflicts=('chromium')
-_uc_ver=101.0.4951.64-1
+_uc_ver="$pkgver-1"
 source=(${source[@]}
         $pkgname-$_uc_ver.tar.gz::https://github.com/Eloston/ungoogled-chromium/archive/$_uc_ver.tar.gz
         drirc-disable-10bpc-color-configs.conf
-        ug-102.patch::https://github.com/Eloston/ungoogled-chromium/pull/1964.patch
         ozone-add-va-api-support-to-wayland.patch
         wayland-egl.patch)
 # Possible replacements are listed in build/linux/unbundle/replace_gn_files.py
 # Keys are the names in the above script; values are the dependencies in Arch
 declare -gA _system_libs=(
-  #[ffmpeg]=ffmpeg
+  [ffmpeg]=ffmpeg
   [flac]=flac
   [fontconfig]=fontconfig
   [freetype]=freetype2
@@ -86,8 +87,6 @@ declare -gA _system_libs=(
   #[libvpx]=libvpx
   [libwebp]=libwebp
   [libxml]=libxml2
-  [re2]=re2
-  [snappy]=snappy
   [libxslt]=libxslt
   [opus]=opus
   [zlib]=minizip
@@ -140,28 +139,40 @@ prepare() {
     third_party/libxml/chromium/*.cc \
     third_party/maldoca/src/maldoca/ole/oss_utils.h
 
-  # Apply patches if Google Clang is not used.
-  if [[ ${GOOGLE_CLANG} != yes ]]; then
-    patch -Np1 -i ../sql-make-VirtualCursor-standard-layout-type.patch
-  fi
+  # Use the --oauth2-client-id= and --oauth2-client-secret= switches for
+  # setting GOOGLE_DEFAULT_CLIENT_ID and GOOGLE_DEFAULT_CLIENT_SECRET at
+  # runtime -- this allows signing into Chromium without baked-in values
+  patch -Np1 -i ../use-oauth2-client-switches-as-default.patch
 
-  # Apply patches if libc++ is not used.
-  #if [[ ${FORCE_LIBCXX} != yes ]]; then
-  #  patch -Np1 -i ../chromium-102-autofill-IWYU.patch
-  #fi
+  # Remove '-Xclang -no-opaque-pointers' flag not supported by our clang
+  patch -Np1 -i ../remove-no-opaque-pointers-flag.patch
 
-  # Custom or upstream patches.
-  patch -Np1 -i ../chromium-101-libxml-unbundle.patch
-  patch -Np0 -i ../chromium-102-disable-dawn.patch
-  #patch -Np0 -i ../chromium-102-no-opaque-pointers.patch
-  patch -Np1 -i ../0021-appdata-branding.patch
+  # Revert kGlobalMediaControlsCastStartStop enabled by default
+  # https://crbug.com/1314342
+  patch -Rp1 -F3 -i ../enable-GlobalMediaControlsCastStartStop.patch
 
+  # Revert ffmpeg roll requiring new channel layout API support
+  # https://crbug.com/1325301
+  patch -Rp1 -i ../roll-src-third_party-ffmpeg.patch
 
-  # Alternative to removing the orchestrator.
-  touch third_party/blink/tools/merge_web_test_results.pydeps
-  mkdir -p third_party/blink/tools/blinkpy/web_tests
-  touch third_party/blink/tools/blinkpy/web_tests/merge_results.pydeps
+  # https://chromium-review.googlesource.com/c/chromium/src/+/2862724
+  patch -Np1 -i ../sql-make-VirtualCursor-standard-layout-type.patch
 
+  # Fixes for building with libstdc++ instead of libc++
+  #patch -Np1 -i ../patches/
+
+  # Enable vaapi on wayland
+  patch -Np1 -i ../ozone-add-va-api-support-to-wayland.patch
+
+  # Ungoogled Chromium changes
+  _ungoogled_repo="$srcdir/ungoogled-chromium-$_uc_ver"
+  _utils="${_ungoogled_repo}/utils"
+  python "$_utils/prune_binaries.py" ./ "$_ungoogled_repo/pruning.list"
+  python "$_utils/patches.py" apply ./ "$_ungoogled_repo/patches"
+  python "$_utils/domain_substitution.py" apply -r "$_ungoogled_repo/domain_regex.list" \
+    -f "$_ungoogled_repo/domain_substitution.list" -c domainsubcache.tar.gz ./
+
+  # Link to system tools required by the build
   mkdir -p third_party/node/linux/node-linux-x64/bin
   mkdir -p third_party/node/linux/node-linux-arm64/bin
   mkdir -p third_party/node/mac/node-darwin-arm64/bin
@@ -169,14 +180,8 @@ prepare() {
   ln -sf /usr/bin/node third_party/node/linux/node-linux-arm64/bin/
   ln -sf /usr/bin/node third_party/node/mac/node-darwin-arm64/bin/
   ln -s /usr/bin/java third_party/jdk/current/bin/
-  _ug_repo="$srcdir/ungoogled-chromium-$_uc_ver"
-  cd $_ug_repo ; patch -Np1 -i ../ug-102.patch ; cd "$srcdir/chromium-$pkgver"
-  _utils="${_ug_repo}/utils"   
-  python "$_utils/prune_binaries.py" ./ "$_ug_repo/pruning.list"
-  python "$_utils/patches.py" apply ./ "$_ug_repo/patches"
-  python "$_utils/domain_substitution.py" apply -r "$_ug_repo/domain_regex.list" \
-    -f "$_ug_repo/domain_substitution.list" -c domainsubcache.tar.gz ./
 
+echo BREAK1
   # Remove bundled libraries for which we will use the system copies; this
   # Ungoogled Chromium changes
   # *should* do what the remove_bundled_libraries.py script does, with the
@@ -190,16 +195,18 @@ prepare() {
       \! -regex '.*\.\(gn\|gni\|isolate\)' \
       -delete
   done
-
+echo BREAK2
   python build/linux/unbundle/replace_gn_files.py \
     --system-libraries "${!_system_libs[@]}"
 
+echo BREAK3
   # Download Google's prebuilt Clang if needed.
   if [[ ${GOOGLE_CLANG} == yes ]]; then
     tools/clang/scripts/update.py
   fi
 
 
+echo BREAK4
   # If using bundled ffmpeg, create link to system opus headers. Compiling fails without this.
   if [[ -z ${_system_libs[ffmpeg]+set} ]]; then
     rm -fr third_party/opus/src/include
@@ -213,6 +220,7 @@ prepare() {
 
   cd chrome
   patch -Np1 -i ../../0012-branding.patch
+  patch -Np1 -i ../0021-appdata-branding.patch
 
   # Applying Chromium launcher patches
   cd "$srcdir/chromium-launcher-$_launcher_ver"
@@ -253,7 +261,7 @@ build() {
     export AR=ar
   fi
   export NM=nm
-  export CFLAGS="-march=armv8.5-a -mtune=apple-m1 -O2 -pipe -fstack-protector-strong -fno-plt -fexceptions -Wp,-D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security"
+  export CFLAGS="-march=armv8.5-a -mtune=apple-m1 -O3 -pipe -fstack-protector-strong -fno-plt -fexceptions -Wp,-D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security"
   #export CFLAGS="-march=armv8.5-a -mcpu=apple-m1 -mtune=apple-m1 -O3 -pipe -fstack-protector-strong -fno-plt -fexceptions -Wp,-D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security"
   export CXXFLAGS=$CFLAGS
 
@@ -266,6 +274,7 @@ build() {
     'is_official_build=true' # implies is_cfi=true on x86_64
     'symbol_level=0' # sufficient for backtraces on x86(_64)
     'is_cfi=false'
+    'chrome_pgo_phase=0'
     'treat_warnings_as_errors=false'
     'disable_fieldtrial_testing_config=true'
     'blink_enable_generated_code_formatting=false'
@@ -386,6 +395,11 @@ package() {
     "$pkgdir/usr/share/applications/thulium.desktop" \
     "$pkgdir/usr/share/man/man1/thulium.1"
 
+  sed -i \
+    -e "s/Chromium/Thulium/g" \
+    -e "s/chromium/thulium/g" \
+    "$pkgdir/chrome/installer/linux/common/chromium-browser/chromium-browser.appdata.xml
+
   install -Dm644 chrome/installer/linux/common/chromium-browser/chromium-browser.appdata.xml \
     "$pkgdir/usr/share/metainfo/thulium.appdata.xml"
   sed -ni \
@@ -412,7 +426,7 @@ package() {
 
   # Install icons.
   for size in 16 22 24 32 48 64 128 256; do
-    install -Dm644 "../product_logo_$size.png" \
+    install -Dm644 "../logos/product_logo_$size.png" \
       "$pkgdir/usr/share/icons/hicolor/${size}x${size}/apps/$pkgname.png"
   done
 
