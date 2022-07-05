@@ -1,7 +1,7 @@
 # Thulium
 Chromium - ungoogled, rebranded and optimized for Apple M1 aarch64 Asahi Linux
 
-Pre-built package:  [thulium-102.0.5005.61-1](https://bw.ded.haus/#/send/UpsZ-MGySWSi2-riWZVd0A/rC-vsc272wGczhoNuIj3Aw)
+Pre-built package:  [thulium-103.0.5060.53-1](https://bw.ded.haus/#/send/UuCH28ndTjCkE-Htm-CtOg/3ByoHaFfG8PFKpIysgC8gg)
 
 
 
