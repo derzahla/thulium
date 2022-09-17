@@ -8,7 +8,7 @@
 # Chromium, ungoogled, and compiled for Asahi linux
 
 pkgname=thulium
-pkgver=103.0.5060.53
+pkgver=103.0.5060.114
 pkgrel=1
 _launcher_ver=8
 _gcc_patchset=4
@@ -16,7 +16,7 @@ pkgdesc="Chromium, ungoogled, rebranded and optimized for Apple M1 aarch64 Asahi
 arch=('aarch64')
 url="https://github.com/derzahla/thulium/"
 license=('BSD')
-options=(!mold !lto)
+options=(!lto)
 #FORCE_LIBCXX='yes'
 depends=('gtk3' 'nss' 'alsa-lib' 'xdg-utils' 'libxss' 'libcups' 'libgcrypt'
          'ttf-liberation' 'systemd' 'dbus' 'libpulse' 'pciutils' 'libva'
@@ -163,6 +163,9 @@ prepare() {
 
   # Enable vaapi on wayland
   patch -Np1 -i ../ozone-add-va-api-support-to-wayland.patch
+  `
+  # Wayland/EGL regression (crbug #1071528 #1071550)
+  patch -Np1 -i ../wayland-egl.patch
 
   # Ungoogled Chromium changes
   _ungoogled_repo="$srcdir/ungoogled-chromium-$_uc_ver"
@@ -292,7 +295,7 @@ build() {
     'use_vaapi=true'
     # wayland/ozone
     'use_ozone=true'
-    'ozone_auto_platforms=false'
+#    'ozone_auto_platforms=false'
     'ozone_platform_headless=true'
     'ozone_platform_x11=true'
     'ozone_platform="x11"'
